@@ -1,0 +1,23 @@
+name: 🚀 Deploy website to cpanel
+
+on:
+  #push:
+   #branches: [ "main" ]
+  pull_request:
+    branches: [ "master" ]
+jobs:
+  ftp:
+    name: 🎉 Upload to cpanel via ftp
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftp.samkirkland.com
+        username: ${{ secrets.username }}
+        password: ${{ secrets.password }}
+        protocol: ftp
+        port: 21
